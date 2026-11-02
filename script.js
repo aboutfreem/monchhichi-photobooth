@@ -8,7 +8,60 @@ filterSelect.addEventListener('change',()=>{photoFilter=filterSelect.value;updat
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function say(s){message.textContent=s}function setBusy(v){busy=v;captureBtn.disabled=v||!stream;startBtn.disabled=v;retakeBtn.disabled=v;downloadBtn.disabled=v||photos.length!==4}
 async function openCamera(){try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('เบราว์เซอร์นี้ไม่รองรับกล้อง หรือยังไม่ได้เปิดผ่าน HTTPS / localhost');if(stream)stream.getTracks().forEach(t=>t.stop());stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:960}},audio:false});video.srcObject=stream;await video.play();video.style.display='block';placeholder.style.display='none';statusEl.textContent='● camera is ready';statusEl.classList.add('active');captureBtn.disabled=false;say('พร้อมแล้ว! กดถ่ายภาพ 4 ช็อตได้เลย ♡')}catch(e){say('เปิดกล้องไม่สำเร็จ: '+(e.name==='NotAllowedError'?'กรุณาอนุญาตการเข้าถึงกล้องในเบราว์เซอร์':e.message));}}
-function snap(){const c=document.createElement('canvas');c.width=900;c.height=675;const g=c.getContext('2d');const vw=video.videoWidth,vh=video.videoHeight;if(!vw||!vh)throw new Error('กล้องยังไม่พร้อม');const ratio=Math.max(c.width/vw,c.height/vh),sw=c.width/ratio,sh=c.height/ratio;g.save();g.translate(c.width,0);g.scale(-1,1);g.filter=filterCSS[photoFilter]||'none';g.drawImage(video,(vw-sw)/2,(vh-sh)/2,sw,sh,0,0,c.width,c.height);g.restore();return c}
+// Apply the same filter directly to pixel data. Safari on iPhone may ignore
+// CanvasRenderingContext2D.filter even while CSS video filters preview correctly.
+const pixelFilterSteps={
+ mocha:[['sepia',.38],['saturate',.78],['contrast',1.06],['brightness',1.03]],
+ caramel:[['sepia',.58],['saturate',1.15],['contrast',1.03],['brightness',1.07]],
+ sepia:[['sepia',.92],['contrast',1.12]],
+ bw:[['grayscale',1],['contrast',1.17]],
+ original:[],
+ soft:[['sepia',.14],['saturate',.8],['brightness',1.12],['contrast',.88]]
+};
+function bakePhotoFilter(canvas,filterName){
+ const steps=pixelFilterSteps[filterName]||[];
+ if(!steps.length)return;
+ const context=canvas.getContext('2d',{willReadFrequently:true});
+ const image=context.getImageData(0,0,canvas.width,canvas.height);
+ const data=image.data;
+ const clamp=v=>Math.max(0,Math.min(255,v));
+ for(let i=0;i<data.length;i+=4){
+  let r=data[i],g=data[i+1],b=data[i+2];
+  for(const [type,amount] of steps){
+   if(type==='sepia'){
+    const nr=.393*r+.769*g+.189*b,ng=.349*r+.686*g+.168*b,nb=.272*r+.534*g+.131*b;
+    r=clamp(r*(1-amount)+nr*amount);g=clamp(g*(1-amount)+ng*amount);b=clamp(b*(1-amount)+nb*amount);
+   }else if(type==='grayscale'){
+    const gray=.2126*r+.7152*g+.0722*b;
+    r=clamp(r*(1-amount)+gray*amount);g=clamp(g*(1-amount)+gray*amount);b=clamp(b*(1-amount)+gray*amount);
+   }else if(type==='saturate'){
+    const nr=(.213+.787*amount)*r+(.715-.715*amount)*g+(.072-.072*amount)*b;
+    const ng=(.213-.213*amount)*r+(.715+.285*amount)*g+(.072-.072*amount)*b;
+    const nb=(.213-.213*amount)*r+(.715-.715*amount)*g+(.072+.928*amount)*b;
+    r=clamp(nr);g=clamp(ng);b=clamp(nb);
+   }else if(type==='contrast'){
+    r=clamp((r-127.5)*amount+127.5);g=clamp((g-127.5)*amount+127.5);b=clamp((b-127.5)*amount+127.5);
+   }else if(type==='brightness'){
+    r=clamp(r*amount);g=clamp(g*amount);b=clamp(b*amount);
+   }
+  }
+  data[i]=r;data[i+1]=g;data[i+2]=b;
+ }
+ context.putImageData(image,0,0);
+}
+function snap(){
+ const c=document.createElement('canvas');c.width=900;c.height=675;
+ const g=c.getContext('2d',{willReadFrequently:true});
+ const vw=video.videoWidth,vh=video.videoHeight;
+ if(!vw||!vh)throw new Error('กล้องยังไม่พร้อม');
+ const ratio=Math.max(c.width/vw,c.height/vh),sw=c.width/ratio,sh=c.height/ratio;
+ g.save();g.translate(c.width,0);g.scale(-1,1);
+ // Draw unfiltered camera frame, then bake pixels for cross-browser support.
+ g.drawImage(video,(vw-sw)/2,(vh-sh)/2,sw,sh,0,0,c.width,c.height);
+ g.restore();
+ bakePhotoFilter(c,photoFilter);
+ return c;
+}
 async function capture(){if(busy||!stream)return;photos=[];setBusy(true);updateTracker();try{for(let i=0;i<4;i++){say(`เตรียมถ่ายภาพที่ ${i+1} / 4`);for(let n=3;n>=1;n--){countdown.hidden=false;countdown.textContent=n;await sleep(850)}countdown.textContent='✦';photos.push(snap());updateTracker();render();await sleep(400);countdown.hidden=true;if(i<3)await sleep(450)}say('เสร็จแล้ว! รูปของคุณกำลังออกจากตู้ปริ้น ♡'); await startPrinting()}catch(e){say('เกิดข้อผิดพลาด: '+e.message)}finally{countdown.hidden=true;setBusy(false)}}
 function updateTracker(){document.querySelectorAll('#shotTracker span').forEach((s,i)=>s.classList.toggle('done',i<photos.length))}
 function reset(){if(busy)return;photos=[];updateTracker();render();say('เริ่มใหม่ได้เลย กดถ่ายภาพอีกครั้ง ♡')}
