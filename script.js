@@ -5,7 +5,20 @@ const filterCSS={mocha:'sepia(.38) saturate(.78) contrast(1.06) brightness(1.03)
 const filterSelect=document.querySelector('#photoFilter');
 photoFilter=filterSelect?.value||photoFilter;
 function updateLiveFilter(){video.style.filter=filterCSS[photoFilter]||'none'}
-filterSelect.addEventListener('change',()=>{photoFilter=filterSelect.value;updateLiveFilter();render()});
+const printFilterSelect=document.querySelector('#printFilter');
+function changePhotoFilter(value){
+ photoFilter=value;
+ filterSelect.value=value;
+ if(printFilterSelect)printFilterSelect.value=value;
+ updateLiveFilter();
+ render();
+ // The printer overlay has its own image, so refresh it too.
+ if(photos.length===4 && printPhoto && !printingOverlay.hidden){
+  printPhoto.src=canvas.toDataURL('image/png');
+ }
+}
+filterSelect.addEventListener('change',()=>changePhotoFilter(filterSelect.value));
+if(printFilterSelect)printFilterSelect.addEventListener('change',()=>changePhotoFilter(printFilterSelect.value));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function say(s){message.textContent=s}function setBusy(v){busy=v;captureBtn.disabled=v||!stream;startBtn.disabled=v;retakeBtn.disabled=v;downloadBtn.disabled=v||photos.length!==4}
 async function openCamera(){try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('เบราว์เซอร์นี้ไม่รองรับกล้อง หรือยังไม่ได้เปิดผ่าน HTTPS / localhost');if(stream)stream.getTracks().forEach(t=>t.stop());stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:960}},audio:false});video.srcObject=stream;await video.play();video.style.display='block';placeholder.style.display='none';statusEl.textContent='● camera is ready';statusEl.classList.add('active');captureBtn.disabled=false;say('พร้อมแล้ว! กดถ่ายภาพ 4 ช็อตได้เลย ♡')}catch(e){say('เปิดกล้องไม่สำเร็จ: '+(e.name==='NotAllowedError'?'กรุณาอนุญาตการเข้าถึงกล้องในเบราว์เซอร์':e.message));}}
@@ -109,7 +122,7 @@ function render(){
   if(photo){const s=PHOTO_SLOTS[i];drawCover(photo,s.x,s.y,s.w,s.h)}
  });
 }
-function download(){if(photos.length!==4)return;const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=`monchhichi-photo-booth-${Date.now()}.png`;document.body.appendChild(a);a.click();a.remove()}
+function download(){if(photos.length!==4)return;render();const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=`monchhichi-photo-booth-${Date.now()}.png`;document.body.appendChild(a);a.click();a.remove()}
 startBtn.addEventListener('click',openCamera);captureBtn.addEventListener('click',capture);retakeBtn.addEventListener('click',reset);downloadBtn.addEventListener('click',download);window.addEventListener('pagehide',()=>{if(stream)stream.getTracks().forEach(t=>t.stop())});render();
 
 // V5: printing animation uses the same composed canvas as PNG download.
@@ -168,6 +181,6 @@ function playFinishAudio(){
 }
 function finishPrinting(){const wasPrinting=!!printingTimer;if(printingTimer){clearInterval(printingTimer);printingTimer=null}stopPrintAudio();if(wasPrinting)playFinishAudio();printBar.style.width='100%';printPercent.textContent='100%';printMessage.textContent='Your memories are ready ♡';printPaper.classList.remove('printing');printPaper.classList.add('finished');printPaper.style.setProperty('clip-path','inset(0 0 0% 0)','important');printFinish.hidden=false;printSkip.hidden=true;if(printingResolve){printingResolve();printingResolve=null}}
 function closePrinting(){finishPrinting();printingOverlay.hidden=true;say('รูปพร้อมแล้ว! เปลี่ยนฟิลเตอร์หรือดาวน์โหลด PNG ได้เลย ♡')}
-function startPrinting(){return new Promise(resolve=>{render();printPhoto.src=canvas.toDataURL('image/png');printingResolve=resolve;printingOverlay.hidden=false;printFinish.hidden=true;printSkip.hidden=false;printBar.style.width='0%';printPercent.textContent='0%';printMessage.textContent='Printing your sweet memories...';printPaper.classList.remove('printing','finished');printPaper.style.setProperty('clip-path','inset(0 0 100% 0)','important');void printPaper.offsetWidth;printPaper.classList.add('printing');startPrintAudio();const begin=performance.now(),duration=7000;printingTimer=setInterval(()=>{const pct=Math.min(100,Math.round((performance.now()-begin)/duration*100));printBar.style.width=pct+'%';printPercent.textContent=pct+'%';printPaper.style.setProperty('clip-path',`inset(0 0 ${100-pct}% 0)`,'important');if(pct===100)finishPrinting()},90)})}
+function startPrinting(){return new Promise(resolve=>{if(printFilterSelect)printFilterSelect.value=photoFilter;render();printPhoto.src=canvas.toDataURL('image/png');printingResolve=resolve;printingOverlay.hidden=false;printFinish.hidden=true;printSkip.hidden=false;printBar.style.width='0%';printPercent.textContent='0%';printMessage.textContent='Printing your sweet memories...';printPaper.classList.remove('printing','finished');printPaper.style.setProperty('clip-path','inset(0 0 100% 0)','important');void printPaper.offsetWidth;printPaper.classList.add('printing');startPrintAudio();const begin=performance.now(),duration=7000;printingTimer=setInterval(()=>{const pct=Math.min(100,Math.round((performance.now()-begin)/duration*100));printBar.style.width=pct+'%';printPercent.textContent=pct+'%';printPaper.style.setProperty('clip-path',`inset(0 0 ${100-pct}% 0)`,'important');if(pct===100)finishPrinting()},90)})}
 document.querySelector('#printSound').addEventListener('change',e=>{if(!e.target.checked){stopPrintAudio();finishSfx.pause()}else{void preparePrinterAudio()}});
 printSkip.addEventListener('click',closePrinting);printFinish.addEventListener('click',closePrinting);

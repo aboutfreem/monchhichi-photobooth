@@ -161,3 +161,9 @@
   .camera-actions { gap: 7px; }
   .camera-actions .button { font-size: 12px; }
 }
+
+/* Post-capture filter control, including on iPhone Safari */
+.print-filter-control{display:flex;flex-direction:column;gap:7px;margin:12px auto 4px;max-width:360px;text-align:left;background:#fff5e8;border:1px solid #cba98b;border-radius:14px;padding:12px 14px;color:#604432;position:relative;z-index:20}
+.print-filter-control label{font-size:13px;font-weight:700}
+.print-filter-control select{width:100%;min-height:44px;border:1px solid #c9a68a;border-radius:9px;background:white;color:#604432;padding:9px;font-size:16px}
+.print-filter-control small{font-size:11px;line-height:1.5;color:#806657}
