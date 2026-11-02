@@ -7,8 +7,8 @@ function updateLiveFilter(){video.style.filter=filterCSS[photoFilter]||'none'}
 filterSelect.addEventListener('change',()=>{photoFilter=filterSelect.value;updateLiveFilter();render()});
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function say(s){message.textContent=s}function setBusy(v){busy=v;captureBtn.disabled=v||!stream;startBtn.disabled=v;retakeBtn.disabled=v;downloadBtn.disabled=v||photos.length!==4}
-async function openCamera(){try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('เบราว์เซอร์นี้ไม่รองรับกล้อง หรือยังไม่ได้เปิดผ่าน HTTPS / localhost');if(stream)stream.getTracks().forEach(t=>t.stop());stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:960}},audio:false});video.srcObject=stream;await video.play();video.style.display='block';updateLiveFilter();placeholder.style.display='none';statusEl.textContent='● camera is ready';statusEl.classList.add('active');captureBtn.disabled=false;say('พร้อมแล้ว! กดถ่ายภาพ 4 ช็อตได้เลย ♡')}catch(e){say('เปิดกล้องไม่สำเร็จ: '+(e.name==='NotAllowedError'?'กรุณาอนุญาตการเข้าถึงกล้องในเบราว์เซอร์':e.message));}}
-function snap(){const c=document.createElement('canvas');c.width=900;c.height=675;const g=c.getContext('2d');const vw=video.videoWidth,vh=video.videoHeight;if(!vw||!vh)throw new Error('กล้องยังไม่พร้อม');const ratio=Math.max(c.width/vw,c.height/vh),sw=c.width/ratio,sh=c.height/ratio;g.translate(c.width,0);g.scale(-1,1);g.filter=filterCSS[photoFilter]||'none';g.drawImage(video,(vw-sw)/2,(vh-sh)/2,sw,sh,0,0,c.width,c.height);g.filter='none';return c}
+async function openCamera(){try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('เบราว์เซอร์นี้ไม่รองรับกล้อง หรือยังไม่ได้เปิดผ่าน HTTPS / localhost');if(stream)stream.getTracks().forEach(t=>t.stop());stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:960}},audio:false});video.srcObject=stream;await video.play();video.style.display='block';placeholder.style.display='none';statusEl.textContent='● camera is ready';statusEl.classList.add('active');captureBtn.disabled=false;say('พร้อมแล้ว! กดถ่ายภาพ 4 ช็อตได้เลย ♡')}catch(e){say('เปิดกล้องไม่สำเร็จ: '+(e.name==='NotAllowedError'?'กรุณาอนุญาตการเข้าถึงกล้องในเบราว์เซอร์':e.message));}}
+function snap(){const c=document.createElement('canvas');c.width=900;c.height=675;const g=c.getContext('2d');const vw=video.videoWidth,vh=video.videoHeight;if(!vw||!vh)throw new Error('กล้องยังไม่พร้อม');const ratio=Math.max(c.width/vw,c.height/vh),sw=c.width/ratio,sh=c.height/ratio;g.save();g.translate(c.width,0);g.scale(-1,1);g.filter=filterCSS[photoFilter]||'none';g.drawImage(video,(vw-sw)/2,(vh-sh)/2,sw,sh,0,0,c.width,c.height);g.restore();return c}
 async function capture(){if(busy||!stream)return;photos=[];setBusy(true);updateTracker();try{for(let i=0;i<4;i++){say(`เตรียมถ่ายภาพที่ ${i+1} / 4`);for(let n=3;n>=1;n--){countdown.hidden=false;countdown.textContent=n;await sleep(850)}countdown.textContent='✦';photos.push(snap());updateTracker();render();await sleep(400);countdown.hidden=true;if(i<3)await sleep(450)}say('เสร็จแล้ว! รูปของคุณกำลังออกจากตู้ปริ้น ♡'); await startPrinting()}catch(e){say('เกิดข้อผิดพลาด: '+e.message)}finally{countdown.hidden=true;setBusy(false)}}
 function updateTracker(){document.querySelectorAll('#shotTracker span').forEach((s,i)=>s.classList.toggle('done',i<photos.length))}
 function reset(){if(busy)return;photos=[];updateTracker();render();say('เริ่มใหม่ได้เลย กดถ่ายภาพอีกครั้ง ♡')}
@@ -22,7 +22,7 @@ const PHOTO_SLOTS=[
 ];
 function drawCover(img,x,y,w,h){
  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
- ctx.filter='none'; // Each snapshot already contains its selected filter.
+ // Filter is baked into each photo at capture time.
  const iw=img.width,ih=img.height,scale=Math.max(w/iw,h/ih);
  const dw=iw*scale,dh=ih*scale;
  ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh);
