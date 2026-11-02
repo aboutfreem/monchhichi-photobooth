@@ -3,6 +3,7 @@ let stream=null,photos=[],busy=false,photoFilter='mocha';
 const frameImage=new Image();frameImage.src='assets/images/monchhichi-final-frame.png';frameImage.onload=()=>render();
 const filterCSS={mocha:'sepia(.38) saturate(.78) contrast(1.06) brightness(1.03)',caramel:'sepia(.58) saturate(1.15) contrast(1.03) brightness(1.07)',sepia:'sepia(.92) contrast(1.12)',bw:'grayscale(1) contrast(1.17)',original:'none',soft:'sepia(.14) saturate(.8) brightness(1.12) contrast(.88)'};
 const filterSelect=document.querySelector('#photoFilter');
+photoFilter=filterSelect?.value||photoFilter;
 function updateLiveFilter(){video.style.filter=filterCSS[photoFilter]||'none'}
 filterSelect.addEventListener('change',()=>{photoFilter=filterSelect.value;updateLiveFilter();render()});
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -59,7 +60,7 @@ function snap(){
  // Draw unfiltered camera frame, then bake pixels for cross-browser support.
  g.drawImage(video,(vw-sw)/2,(vh-sh)/2,sw,sh,0,0,c.width,c.height);
  g.restore();
- bakePhotoFilter(c,photoFilter);
+ // Keep the unfiltered original, just like the working HBD project.
  return c;
 }
 async function capture(){if(busy||!stream)return;photos=[];setBusy(true);updateTracker();try{for(let i=0;i<4;i++){say(`เตรียมถ่ายภาพที่ ${i+1} / 4`);for(let n=3;n>=1;n--){countdown.hidden=false;countdown.textContent=n;await sleep(850)}countdown.textContent='✦';photos.push(snap());updateTracker();render();await sleep(400);countdown.hidden=true;if(i<3)await sleep(450)}say('เสร็จแล้ว! รูปของคุณกำลังออกจากตู้ปริ้น ♡'); await startPrinting()}catch(e){say('เกิดข้อผิดพลาด: '+e.message)}finally{countdown.hidden=true;setBusy(false)}}
@@ -73,9 +74,24 @@ const PHOTO_SLOTS=[
  {x:150,y:809,w:237,h:372},
  {x:405,y:809,w:238,h:372}
 ];
+// HBD method: apply the selected filter when composing the strip, not when taking a snapshot.
+// Cache filtered canvases by original snapshot and filter mode.
+const filteredPhotoCache=new WeakMap();
+function filteredPhoto(img){
+ if(photoFilter==='original')return img;
+ const cached=filteredPhotoCache.get(img);
+ if(cached&&cached.mode===photoFilter)return cached.canvas;
+ const out=document.createElement('canvas');
+ out.width=img.width;out.height=img.height;
+ out.getContext('2d').drawImage(img,0,0);
+ bakePhotoFilter(out,photoFilter);
+ filteredPhotoCache.set(img,{mode:photoFilter,canvas:out});
+ return out;
+}
 function drawCover(img,x,y,w,h){
+ img=filteredPhoto(img);
  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
- // Filter is baked into each photo at capture time.
+ // Filter is baked into a separate canvas when composing the strip.
  const iw=img.width,ih=img.height,scale=Math.max(w/iw,h/ih);
  const dw=iw*scale,dh=ih*scale;
  ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh);
