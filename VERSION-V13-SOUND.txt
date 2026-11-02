@@ -1,0 +1,1 @@
+V13: original gentle printer sound + completion chime; audio synced to 7-second printing. Sound toggle supported. Existing camera, layout, filters, print visuals preserved.

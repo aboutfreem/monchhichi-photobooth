@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6eee5">
+  <title>Monchhichi Memory Booth ♡</title>
+  <link rel="stylesheet" href="style.css?v=12-mobile">
+</head>
+
+<body>
+  <div class="grain"></div>
+  <header class="topbar"><a class="brand" href="#">✿ monchhichi <span>memory booth</span></a>
+    <div class="top-tag">made for little moments ✧</div>
+  </header>
+  <main>
+    <section class="intro"><span class="eyebrow">♡ YOUR LITTLE PHOTO CORNER ♡</span>
+      <h1>tiny moments,<br><em>big memories.</em></h1>
+      
+    </section>
+    <div class="character-banner"><img src="assets/images/monchhichi-brown.png" alt="Monchhichi">
+      <div><strong>♡ Monchhichi little memories</strong></div>
+    </div>
+    <div class="workspace">
+      <section class="camera-panel">
+        <div class="panel-heading">
+          <div><span class="section-no">01 / THE CAMERA</span>
+            <h2>say cheese! <span>✳</span></h2>
+          </div><span id="cameraStatus" class="status">● camera is off</span>
+        </div>
+        <div class="viewfinder"><video id="video" autoplay playsinline muted></video>
+          <div id="cameraPlaceholder" class="placeholder"><img class="monchhichi-hero"
+              src="assets/images/monchhichi-brown.png" alt="ตุ๊กตา Monchhichi จากภาพอ้างอิง">
+            <h3>ready for your close-up?</h3>
+            <p>กดเปิดกล้องเพื่อเริ่มถ่ายภาพ</p>
+          </div>
+          <div id="countdown" class="countdown" hidden>3</div>
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
+        </div>
+        <div class="camera-actions"><button id="startCamera" class="button secondary">◉ เปิดกล้อง</button><button
+            id="capture" class="button primary" disabled>✦ ถ่ายภาพ 4 ช็อต</button><button id="retake"
+            class="button ghost">↺ เริ่มใหม่</button></div>
+        <p id="message" class="helper" role="status">อนุญาตให้เว็บไซต์เข้าถึงกล้องเมื่อเบราว์เซอร์ถามนะครับ</p>
+        <div class="shot-tracker" id="shotTracker"><span>PHOTO 01</span><span>PHOTO 02</span><span>PHOTO
+            03</span><span>PHOTO 04</span></div>
+      </section>
+      <section class="result-panel">
+        <div class="panel-heading">
+          <div><span class="section-no">YOUR MEMORY</span>
+            <h2>your monchhichi frame <span>♡</span></h2>
+          </div>
+        </div>
+        <div class="filter-control"><label for="photoFilter">✦ เลือกฟิลเตอร์ภาพ</label><select id="photoFilter">
+            <option value="mocha">Monchhichi Mocha ☕ (น้ำตาลอบอุ่น)</option>
+            <option value="caramel">Caramel Cream (คาราเมล)</option>
+            <option value="sepia">Vintage Sepia (น้ำตาลวินเทจ)</option>
+            <option value="bw">Classic B&W (ขาวดำ)</option>
+            <option value="original">Original (สีธรรมชาติ)</option>
+            <option value="soft">Soft Dream (ละมุน)</option>
+          </select><small>เปลี่ยนฟิลเตอร์ได้แม้ถ่ายภาพเสร็จแล้ว</small></div>
+        <div class="preview-stage"><canvas id="strip" width="793" height="1983"
+            aria-label="ตัวอย่างแถบภาพ 4 รูป"></canvas></div><button id="download" class="button download" disabled>↓
+          ดาวน์โหลดรูปภาพ PNG</button>
+        <p class="helper center">ภาพทั้งหมดประมวลผลในเบราว์เซอร์ ไม่อัปโหลดไปเซิร์ฟเวอร์ ♡</p>
+      </section>
+    </div>
+    <div id="printingOverlay" class="printing-overlay" hidden role="dialog" aria-modal="true"
+      aria-label="Monchhichi printing machine">
+      <div class="print-content">
+        <div class="print-machine reference-machine" data-design="V10-REFERENCE">
+          <img class="reference-booth" src="assets/images/printer-reference-background.jpg?v=11-fixed"
+            alt="Monchhichi photo printing booth" />
+          <div class="reference-screen"><span id="printMessage">Printing your sweet memories...</span><strong
+              id="printPercent">0%</strong>
+            <div class="progress-track">
+              <div id="printBar"></div>
+            </div>
+          </div>
+          <div class="reference-paper-viewport">
+            <div id="printPaper" class="print-paper"><img id="printPhoto"
+                alt="Your finished Monchhichi photobooth photos"></div>
+          </div>
+          <div class="reference-slot-front"></div>
+        </div>
+        <div class="print-actions"><label class="sound-toggle"><input id="printSound" type="checkbox" checked> ♫
+            เสียงเครื่องปริ้น</label><button id="printFinish" class="button primary" hidden>♡
+            ดูรูปของฉัน</button><button id="printSkip" class="button secondary">ข้ามแอนิเมชัน</button></div>
+      </div>
+    </div>
+  </main>
+  <footer>✿ made with love & little memories ✿</footer>
+  <script src="script.js?v=12-mobile"></script>
+</body>
+
+</html>

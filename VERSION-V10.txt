@@ -1,0 +1,1 @@
+Monchhichi Photobooth V10 FIXED. The printing booth is a single reference image, not CSS-built. Open THIS folder/index.html using Live Server. If you still see the old booth, you are serving a different folder.

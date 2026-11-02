@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+:root{--bg:#f6eee5;--ink:#453b37;--muted:#887d74;--pink:#e6a9a8;--brown:#a77963;--line:#e6d9cb}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}.grain{pointer-events:none;position:fixed;inset:0;opacity:.2;background-image:radial-gradient(#ad9c8d .5px,transparent .5px);background-size:7px 7px}.topbar{position:relative;z-index:1;max-width:1200px;margin:auto;padding:27px 30px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.brand{text-decoration:none;color:#865d4c;font-size:23px;font-weight:700;letter-spacing:-1px}.brand span{display:block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}.top-tag,.eyebrow,.section-no{font-size:11px;letter-spacing:2.5px;font-weight:700;color:#ae7f77}.intro{text-align:center;padding:50px 16px 36px;position:relative}.intro h1{font:600 clamp(44px,6vw,72px)/1.06 'Playfair Display',serif;margin:12px 0 18px;letter-spacing:-2px}.intro h1 em{color:#c48d8c}.intro p{font-size:14px;color:var(--muted);max-width:490px;margin:auto;line-height:1.8}.workspace{position:relative;max-width:1130px;margin:0 auto 75px;padding:0 22px;display:grid;grid-template-columns:1.08fr .92fr;gap:24px}.camera-panel,.result-panel{background:#fffaf5;border:1px solid #e9dbd0;border-radius:24px;padding:26px;box-shadow:0 10px 45px #6e463b0b}.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.panel-heading h2{font:600 27px 'Playfair Display',serif;margin:6px 0 0}.panel-heading h2 span{color:var(--pink)}.status{font-size:11px;color:#9c8274;background:#f5ebe2;border-radius:30px;padding:9px 12px;white-space:nowrap}.status.active{color:#557f62;background:#e8f2e8}.viewfinder{position:relative;background:#e7d8cb;aspect-ratio:4/3;border-radius:16px;overflow:hidden;display:grid;place-items:center}video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:none}.placeholder{text-align:center;padding:18px}.placeholder h3{font:600 22px 'Playfair Display',serif;margin:12px 0 5px}.placeholder p{font-size:12px;color:#947e72}.mascot{width:115px;height:115px;background:#f9f3e7;border:11px solid #fff;border-radius:50%;margin:auto;display:grid;place-items:center;color:#c69b9c;position:relative;font-size:18px;box-shadow:0 5px 25px #8a685522}.mascot-face{position:absolute;inset:20px 15px 10px;border-radius:50%;background:#caa78b;display:flex;justify-content:space-around;align-items:center}.mascot-face i{width:10px;height:13px;background:#392b2b;border-radius:50%;margin-top:-6px}.mascot-face b{position:absolute;top:47%;font-size:13px;color:#392b2b}.corner{position:absolute;width:24px;height:24px;border-color:#fff9ef;border-style:solid;z-index:2}.tl{top:15px;left:15px;border-width:2px 0 0 2px}.tr{top:15px;right:15px;border-width:2px 2px 0 0}.bl{bottom:15px;left:15px;border-width:0 0 2px 2px}.br{bottom:15px;right:15px;border-width:0 2px 2px 0}.countdown{position:absolute;inset:0;background:#2c1d1d70;display:grid;place-items:center;font:700 110px 'Playfair Display',serif;color:white;z-index:4}.countdown[hidden]{display:none}.camera-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.button{border:0;border-radius:12px;padding:14px 17px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:.2s}.button:hover:not(:disabled){transform:translateY(-2px)}.button:disabled{opacity:.45;cursor:not-allowed}.primary{background:#b9837c;color:white;flex:1}.secondary{background:#eee1d6;color:#674c40}.ghost{background:#f8f1ea;color:#765e50}.helper{font-size:11px;color:#9a8c80;line-height:1.7}.shot-tracker{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:25px}.shot-tracker span{border:1px dashed #dac9bc;text-align:center;padding:12px 3px;border-radius:9px;font-size:9px;letter-spacing:1px;color:#b3a59b}.shot-tracker span.done{background:#e8c9c3;color:#80564f;border:1px solid #e8c9c3}.theme-picker{display:grid;grid-template-columns:1fr 1fr;gap:10px}.theme-choice{text-align:left;background:white;border:2px solid #eaded4;border-radius:14px;padding:9px;cursor:pointer;color:var(--ink)}.theme-choice.selected{border-color:#bc8c82;background:#fff7f2}.swatch{height:58px;border-radius:9px;display:grid;place-items:center;font-size:20px;margin-bottom:9px}.cute-swatch{background:#eadbd1;color:#b9807f}.vintage-swatch{background-color:#e8ded2;color:#2f2a28;background-image:radial-gradient(#2f2a28 2px,transparent 2px);background-size:24px 24px}.theme-choice strong,.theme-choice small{display:block}.theme-choice strong{font-size:12px}.theme-choice small{font-size:10px;color:#9c8c80;margin-top:4px}.preview-stage{background:#f0e7dc;border-radius:15px;display:flex;justify-content:center;align-items:center;padding:23px;margin:17px 0;min-height:370px;background-image:radial-gradient(#d6c6b8 1px,transparent 1px);background-size:17px 17px}#strip{display:block;width:min(100%,220px);height:auto;box-shadow:0 7px 23px #3e302c30}.download{width:100%;background:#493d37;color:white}.center{text-align:center}footer{text-align:center;color:#a28e80;font-size:12px;padding:0 20px 35px}@media(max-width:800px){.workspace{grid-template-columns:1fr;max-width:580px}.intro{padding-top:35px}.top-tag{display:none}.camera-panel,.result-panel{padding:18px}.intro h1{letter-spacing:-1px}.camera-actions .button{flex-grow:1}}
+
+/* Monchhichi V2 additions */
+.character-banner{max-width:800px;margin:0 auto 28px;padding:12px 22px;display:flex;align-items:center;justify-content:center;gap:18px;color:#674b38}.character-banner img{width:105px;height:105px;object-fit:contain;border-radius:50%;box-shadow:0 5px 25px #5c38241b}.character-banner strong{font-family:Georgia,serif;font-size:20px}.character-banner p{font-size:12px;color:#947965}.monchhichi-hero{width:150px;max-width:65%;aspect-ratio:1;object-fit:contain;border-radius:50%;filter:drop-shadow(0 8px 10px #6e4b3833)}.filter-control{display:flex;flex-direction:column;gap:7px;margin-top:19px}.filter-control label{font-size:13px;font-weight:700;color:#6d4d3b}.filter-control select{width:100%;border:1px solid #d7bda6;background:#fffaf5;color:#624534;border-radius:10px;padding:12px;font:inherit;font-size:13px}.filter-control small{color:#9c8171;font-size:11px}body{background:#f4e9dc}.intro h1 em{color:#a97755}.primary{background:#986b50}.theme-choice.selected{border-color:#986b50}.character-banner img{background:white}@media(max-width:500px){.character-banner{padding:8px 20px}.character-banner img{width:76px;height:76px}.character-banner strong{font-size:16px}}
+
+/* Single official-looking Monchhichi reference frame */
+#strip{width:min(100%,310px)}
+.preview-stage{padding:16px}
+
+/* V5 animated Monchhichi print machine */
+.printing-overlay[hidden],#printFinish[hidden]{display:none!important}.printing-overlay{position:fixed;inset:0;z-index:100;background:#2d201cde;display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:20px 12px}.print-content{width:min(100%,480px);text-align:center}.print-machine{position:relative;margin:40px auto 10px;max-width:380px}.machine-top{height:120px;position:relative;display:flex;align-items:center;justify-content:center}.machine-logo{background:#fff2db;border:5px solid #4a2e26;border-radius:22px;padding:12px 22px;font:bold 25px Georgia,serif;color:#5b392b;box-shadow:0 8px 0 #291c18}.machine-logo small{display:block;font:700 9px 'DM Sans',sans-serif;letter-spacing:2px;margin-top:4px}.deco{position:absolute;width:104px;height:110px;object-fit:contain;z-index:3;filter:drop-shadow(0 4px 5px #27130f55)}.deco.sheep{left:-9px;top:0;border-radius:50%}.deco.pink{right:-13px;top:0}.machine-bow{position:absolute;right:8px;top:100px;width:93px;height:65px;object-fit:contain;z-index:4;mix-blend-mode:multiply}.machine-body{background:linear-gradient(110deg,#6a4535,#402720 80%);border:9px solid #32201b;border-radius:32px 32px 19px 19px;padding:33px 25px 24px;min-height:390px;box-shadow:0 20px 30px #150b0966,inset 0 0 0 3px #a7795a;position:relative}.machine-screen{background:#fff2df;border:5px solid #a97b5e;border-radius:16px;padding:18px 12px;color:#573b2f;font-size:12px}.machine-screen strong{display:block;font-size:26px;margin:5px}.progress-track{height:9px;background:#e7d4c0;border-radius:20px;overflow:hidden}.progress-track div{width:0;height:100%;background:#ac765a;transition:width .12s linear}.machine-button{position:absolute;top:150px;right:18px;width:58px;height:58px;object-fit:contain;mix-blend-mode:multiply}.print-slot{height:27px;width:76%;margin:94px auto 0;background:#180f0d;border-radius:8px;position:relative;z-index:2;box-shadow:inset 0 3px 5px #000}.print-paper{position:absolute;top:10px;left:50%;width:62%;height:245px;transform:translate(-50%,-100%);overflow:hidden;opacity:0;transition:none;z-index:-1;background:#fff7e7;box-shadow:0 6px 10px #0004}.print-paper img{display:block;width:100%;height:100%;object-fit:fill}.print-paper.printing{opacity:1;animation:paper-feed 7s linear forwards}.print-paper.finished{opacity:1;transform:translate(-50%,6px)}@keyframes paper-feed{from{transform:translate(-50%,-100%)}to{transform:translate(-50%,6px)}}.slot-lip{height:8px;width:79%;background:#b58b70;border-radius:9px;margin:-3px auto 0;position:relative;z-index:3}.machine-label{color:#ffe6cb;font-size:10px;letter-spacing:2px;margin-top:15px}.print-actions{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;padding:15px}.sound-toggle{color:#fff3e6;font-size:12px}.print-actions .button{flex:0 1 auto}@media(max-width:420px){.deco{width:79px;height:88px}.machine-logo{font-size:20px;padding:12px}.machine-bow{width:75px}.machine-body{padding:30px 15px 22px}.print-paper{height:215px}}
+
+/* V6: integrated print station and clean paper-feed layering */
+.printing-overlay{align-items:flex-start;padding:30px 12px 40px;overflow-y:auto;background:rgba(33,22,19,.82);backdrop-filter:blur(5px)}
+.print-content{width:min(100%,620px);padding-bottom:40px}
+.print-machine{max-width:540px;margin:105px auto 0;isolation:isolate}
+.machine-top{position:absolute;z-index:9;top:-112px;left:0;right:0;height:132px;pointer-events:none}
+.machine-logo{position:relative;z-index:1;font-size:clamp(22px,5vw,32px);padding:16px 50px;border:5px solid #b88a6b;border-radius:28px;box-shadow:0 5px 0 #43291f,0 10px 15px #1c100d66;text-shadow:0 1px #fff}
+.machine-logo small{font-size:10px}
+.deco{width:clamp(110px,26%,165px);height:160px;object-fit:contain;border-radius:0!important;filter:drop-shadow(0 5px 5px #21100c66)}
+.deco.sheep{left:-15px;top:0}.deco.pink{right:-15px;top:0}
+.machine-body{min-height:480px;padding:34px 35px 95px;border:10px solid #42271e;border-radius:48px;background:linear-gradient(140deg,#77503f,#503126 75%);box-shadow:0 22px 40px #140a0870,inset 0 0 0 3px #bb9275;overflow:visible}
+.machine-body:before{content:'';position:absolute;inset:14px;border:2px dashed #f1d8b9;border-radius:30px;pointer-events:none}
+.machine-screen{position:relative;z-index:6;border:6px solid #c79c7d;border-radius:27px;padding:22px 14px;box-shadow:0 3px 8px #27150e66;background:#fff3df}
+.machine-screen strong{font-size:38px;margin:8px}
+.machine-button{top:230px;right:24px;width:57px;height:57px;mix-blend-mode:normal;z-index:4}
+.machine-bow{top:-145px;left:50%;right:auto;transform:translateX(-50%);width:95px;height:80px;mix-blend-mode:normal;z-index:12}
+.print-slot{margin:96px auto 0;width:77%;height:24px;border:6px solid #b98567;border-radius:20px;background:#190e0b;box-shadow:0 4px 5px #160c0a88;z-index:5}
+.print-paper{position:absolute;left:50%;top:8px;width:70%;height:auto;aspect-ratio:793/1983;overflow:hidden;opacity:0;background:#fff7e7;z-index:-1;box-shadow:0 10px 24px #100a0966;transform:translate(-50%,-100%)}
+.print-paper img{width:100%;height:100%;object-fit:fill}
+.print-paper.printing{opacity:1;animation:paper-feed-v6 7s linear forwards}
+.print-paper.finished{opacity:1;transform:translate(-50%,14px)}
+@keyframes paper-feed-v6{from{transform:translate(-50%,-100%)}to{transform:translate(-50%,14px)}}
+.slot-lip{position:relative;z-index:7;margin:-7px auto 0;width:77%;height:10px;background:linear-gradient(#e3b89a,#99674e);border-radius:10px}
+.machine-label{margin-top:30px;position:relative;z-index:4}
+.print-actions{position:relative;margin-top:390px;z-index:12}
+@media(max-width:540px){.print-machine{margin-top:90px}.machine-top{top:-90px;height:110px}.deco{width:100px;height:112px}.deco.sheep{left:-4px}.deco.pink{right:-4px}.machine-logo{font-size:19px;padding:12px 30px}.machine-logo small{font-size:7px}.machine-bow{top:-117px;width:75px}.machine-body{min-height:370px;padding:24px 16px 70px;border-radius:30px}.machine-screen{padding:16px 8px}.machine-screen strong{font-size:28px}.print-slot{margin-top:75px}.machine-button{top:190px;right:12px;width:43px;height:43px}.print-actions{margin-top:270px}.print-paper{width:72%}}
+
+/* V7: the print starts INSIDE the output slot; never passes over the display.
+   Reveal the photo progressively downwards instead of moving the whole image
+   from above the machine. Keep the original photo aspect ratio. */
+.print-slot{overflow:visible;isolation:isolate;}
+.print-paper{
+  top:calc(100% - 3px);left:50%;width:70%;height:auto;aspect-ratio:793/1983;
+  transform:translateX(-50%);opacity:1;z-index:-1;
+  clip-path:inset(0 0 100% 0);animation:none;
+  will-change:clip-path;
+}
+.print-paper.printing{
+  opacity:1;transform:translateX(-50%);
+  animation:paper-feed-v7 7s linear both;
+}
+.print-paper.finished{
+  opacity:1;transform:translateX(-50%);
+  clip-path:inset(0 0 0 0);animation:none;
+}
+@keyframes paper-feed-v7{
+  from{clip-path:inset(0 0 100% 0)}
+  to{clip-path:inset(0 0 0 0)}
+}
+/* The printer's lower lip always sits over the emerging top edge. */
+.slot-lip{z-index:8;}
+
+/* V8: reference-matched chocolate print machine. V7 paper reveal retained unchanged. */
+.print-content{width:min(100%,760px);padding-bottom:55px}
+.print-machine{max-width:670px;margin:150px auto 0;isolation:isolate}
+.machine-top{top:-174px;height:190px;z-index:12}
+.machine-logo{font-family:Georgia,serif;font-size:clamp(25px,5vw,43px);font-weight:900;line-height:1.05;color:#563226;background:linear-gradient(135deg,#fff5e5,#f6dfbf);border:5px solid #a9795d;border-radius:45% 45% 18px 18px / 35% 35% 18px 18px;padding:24px 70px 17px;box-shadow:0 5px 0 #4e2e23,0 12px 18px #1b0b0955;text-shadow:2px 2px #d9b69a}
+.machine-logo small{font:800 13px Georgia,serif;letter-spacing:1.7px;margin-top:9px;color:#603a2c}
+.deco{width:clamp(120px,31%,220px);height:215px;object-fit:contain;filter:drop-shadow(0 8px 5px #170c0960)}
+.deco.sheep{left:-24px;top:6px}.deco.pink{right:-24px;top:3px}
+.machine-bow{top:-203px;width:160px;height:96px;z-index:15;filter:drop-shadow(0 4px 4px #26160f55)}
+.machine-body{min-height:540px;padding:38px 54px 105px;border:11px solid #4c2e24;border-radius:64px;background:radial-gradient(ellipse at 50% 0%,#775040 0%,#5c382c 55%,#48291f 100%);box-shadow:0 22px 45px #12080799,inset 0 0 0 5px #bd8b6c,inset 0 0 0 9px #704b3b}
+.machine-body:before{inset:19px;border:2px dashed #f8d8b5;border-radius:45px}
+.machine-screen{z-index:7;border:6px solid #b98568;border-radius:39px;background:linear-gradient(135deg,#fff5e4,#fff0d5);padding:22px 15px 26px;box-shadow:0 5px 10px #24120d70,inset 0 0 0 2px #fff9ec;color:#563428;font-size:clamp(13px,2vw,18px);font-weight:700}
+.machine-screen strong{font-size:clamp(38px,6vw,51px);margin:10px 0}
+.progress-track{height:17px;background:#e7ceba;margin:4px 12px 0;border-radius:20px}
+.progress-track div{background:#92583f}
+.machine-button{position:absolute;top:262px;width:74px;height:74px;z-index:6;mix-blend-mode:normal;filter:drop-shadow(0 5px 3px #180b0855)}
+.machine-button.star-left{left:49px;right:auto}.machine-button.star-right{right:49px;left:auto}
+.print-slot{margin:122px auto 0;width:78%;height:57px;border:7px solid #b88768;border-radius:38px;background:linear-gradient(#120a09,#26140f);box-shadow:0 5px 8px #1d0d0a99,inset 0 4px 5px #000b;z-index:5}
+.slot-lip{width:75%;height:10px;margin:-12px auto 0;background:linear-gradient(#e6bb98,#9b6348);border-radius:12px;z-index:8}
+.slot-bow{position:absolute;top:354px;left:50%;transform:translateX(-50%);width:156px;height:100px;object-fit:contain;z-index:10;pointer-events:none;filter:drop-shadow(0 5px 4px #170a0855)}
+/* Paper remains anchored at the output opening, clipped downward by V7 animation. */
+.print-paper{top:calc(100% - 3px);width:64%;z-index:-1}
+.print-actions{margin-top:580px;z-index:12}
+@media(max-width:700px){.print-machine{margin-top:130px}.machine-top{top:-145px;height:155px}.machine-logo{font-size:clamp(20px,5vw,31px);padding:17px 48px 13px}.machine-logo small{font-size:9px}.deco{width:30%;height:160px}.deco.sheep{left:-8px}.deco.pink{right:-8px}.machine-bow{top:-165px;width:125px}.machine-body{min-height:410px;padding:28px 28px 65px;border-radius:44px}.machine-body:before{inset:12px;border-radius:30px}.machine-screen{padding:17px 8px 20px;border-radius:27px}.machine-button{top:205px;width:53px;height:53px}.machine-button.star-left{left:20px}.machine-button.star-right{right:20px}.print-slot{margin-top:95px;height:44px}.slot-bow{top:285px;width:118px;height:80px}.print-actions{margin-top:460px}}
+@media(max-width:420px){.print-machine{margin-top:105px}.machine-top{top:-112px;height:120px}.machine-logo{font-size:20px;padding:14px 40px 11px;border-width:4px}.machine-logo small{font-size:7px}.deco{height:120px;width:32%}.machine-bow{top:-129px;width:95px;height:70px}.machine-body{padding:23px 19px 45px;border-width:8px;min-height:335px;border-radius:35px}.machine-screen{font-size:11px;border-width:4px;padding:12px 6px 16px}.machine-screen strong{font-size:30px}.progress-track{height:10px}.machine-button{top:167px;width:43px;height:43px}.machine-button.star-left{left:11px}.machine-button.star-right{right:11px}.print-slot{margin-top:75px;height:33px;border-width:5px}.slot-bow{top:226px;width:94px;height:66px}.print-paper{width:68%}.print-actions{margin-top:365px}}
+
+/* V9: Exact visual booth artwork from the user's second reference.
+   The screen and printed photograph remain live interactive elements. */
+.print-content{width:min(100%,720px);padding-bottom:40px}
+.print-machine.reference-machine{position:relative;width:100%;max-width:700px;margin:0 auto;aspect-ratio:700/1005;isolation:isolate}
+.reference-booth{display:block;width:100%;height:100%;object-fit:fill;pointer-events:none}
+.reference-screen{position:absolute;z-index:4;left:13.1%;top:25.4%;width:73.8%;height:16.2%;background:#fff1d9;border-radius:8%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5%;color:#573626;font-family:Arial,sans-serif}
+.reference-screen span{font-size:clamp(9px,1.7vw,18px);font-weight:700}
+.reference-screen strong{font-size:clamp(24px,4vw,46px);line-height:1.1}
+.reference-screen .progress-track{width:86%;height:12px;border-radius:20px;background:#ead4bd;overflow:hidden}
+.reference-screen .progress-track div{height:100%;width:0;background:#955c43;transition:width .12s linear}
+.reference-paper-viewport{position:absolute;left:31.7%;top:57.9%;width:36.5%;height:41.9%;overflow:hidden;z-index:3;pointer-events:none}
+.reference-machine .print-paper{position:absolute;left:0;top:0;width:100%;height:auto;aspect-ratio:793/1983;opacity:1;box-shadow:none;z-index:1;transform:translateY(-100%);background:#fff7e7}
+.reference-machine .print-paper img{display:block;width:100%;height:100%;object-fit:fill}
+.reference-machine .print-paper.printing{animation:reference-feed 7s linear forwards}
+.reference-machine .print-paper.finished{transform:translateY(0)}
+@keyframes reference-feed{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.reference-slot-front{position:absolute;z-index:5;left:21%;top:56.4%;width:58%;height:1.6%;border-radius:20px;background:linear-gradient(#b77d59,#e0ac83 50%,#704532);box-shadow:0 2px 3px #180c0866;pointer-events:none}
+.print-actions{position:relative;margin:0 auto 20px;z-index:12}
+@media(max-width:550px){.printing-overlay{padding:8px 5px}.reference-screen .progress-track{height:7px}.reference-screen span{font-size:clamp(8px,2.4vw,12px)}.reference-screen strong{font-size:clamp(20px,7vw,36px)}}
+
+/* V10 FIX: reference artwork is the ONLY machine skin. */
+.printing-overlay:not([hidden]){display:flex!important;align-items:flex-start;justify-content:center;overflow-y:auto;padding:20px 10px 35px}
+.printing-overlay[hidden]{display:none!important}
+.print-content{width:min(100%,690px)!important;margin:auto;padding:0 0 24px!important}
+.print-machine.reference-machine{width:100%!important;max-width:690px!important;margin:0 auto!important;aspect-ratio:700/1005!important;position:relative!important;isolation:isolate!important;overflow:visible!important;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;min-height:0!important}
+.reference-machine::before,.reference-machine::after{display:none!important}
+.reference-booth{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;z-index:0}
+.reference-screen{left:12.3%!important;top:25.1%!important;width:75.4%!important;height:17.1%!important;z-index:2!important;border:0!important;box-shadow:none!important;background:#fff1db!important;border-radius:7%!important;padding:1%!important;gap:4%!important}
+.reference-paper-viewport{left:31.9%!important;top:58.6%!important;width:36.2%!important;height:41.4%!important;z-index:3!important;overflow:hidden!important}
+.reference-machine .print-paper{left:0!important;top:0!important;width:100%!important;height:auto!important;aspect-ratio:793/1983!important;clip-path:none!important;opacity:1!important;transform:translateY(-100%)!important;animation:none!important}
+.reference-machine .print-paper.printing{animation:v10-feed 7s linear forwards!important}
+.reference-machine .print-paper.finished{transform:translateY(0)!important}
+@keyframes v10-feed{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.reference-slot-front{left:21.2%!important;top:58.1%!important;width:57.6%!important;height:1.2%!important;z-index:5!important}
+.print-actions{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin:12px auto 0!important;position:relative!important;z-index:20!important}
+@media(max-width:550px){.printing-overlay:not([hidden]){padding:10px 4px 24px}.print-actions{padding:0 8px}}
+
+/* V11: screen stays INSIDE the printed artwork; paper reveal is progress-driven. */
+.reference-machine .reference-screen{box-sizing:border-box!important;left:13.1%!important;top:25.2%!important;width:73.8%!important;height:17.5%!important;padding:2% 3%!important;border-radius:8% / 23%!important;background:#fff1dc!important;overflow:hidden!important;gap:3%!important}
+.reference-machine .reference-screen span{font-size:clamp(11px,1.8vw,18px)!important;line-height:1.2!important}
+.reference-machine .reference-screen strong{font-size:clamp(24px,4.3vw,46px)!important;line-height:1.1!important}
+.reference-machine .reference-screen .progress-track{width:91%!important;margin:0!important;height:clamp(7px,1.5vw,13px)!important;flex-shrink:0!important}
+.reference-machine .reference-paper-viewport{left:31.9%!important;top:59.1%!important;width:36.2%!important;height:65%!important;overflow:visible!important;z-index:3!important}
+.reference-machine .print-paper,.reference-machine .print-paper.printing,.reference-machine .print-paper.finished{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:auto!important;aspect-ratio:793/1983!important;opacity:1!important;transform:none!important;animation:none!important;transition:none!important;clip-path:inset(0 0 100% 0)!important;will-change:clip-path}
+.reference-machine .reference-slot-front{top:58.6%!important;height:1.0%!important}
+.reference-machine .print-paper img{display:block;width:100%!important;height:100%!important;object-fit:fill!important}
+.print-content .print-actions{margin-top:245px!important}
+@media(max-width:550px){.print-content .print-actions{margin-top:34vw!important}.reference-machine .reference-screen span{font-size:clamp(8px,2.3vw,13px)!important}.reference-machine .reference-screen strong{font-size:clamp(20px,6vw,33px)!important}}
+
+/* V12: mobile camera controls — override legacy flex sizing */
+@media (max-width: 600px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+  .workspace { width: 100%; max-width: 580px; padding: 0 12px; gap: 18px; }
+  .camera-panel, .result-panel { min-width: 0; padding: 16px; border-radius: 20px; }
+  .panel-heading { min-width: 0; flex-wrap: wrap; }
+  .panel-heading h2 { font-size: clamp(21px, 6vw, 27px); }
+  .camera-actions { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 100%; margin-top: 14px; }
+  .camera-actions .button { width: 100%; min-width: 0; min-height: 52px; padding: 12px 8px; font-size: 13px; line-height: 1.35; white-space: normal; overflow-wrap: normal; word-break: keep-all; flex: none !important; }
+  .camera-actions #startCamera { grid-column: 1; grid-row: 1; }
+  .camera-actions #retake { grid-column: 2; grid-row: 1; }
+  .camera-actions #capture { grid-column: 1 / -1; grid-row: 2; min-height: 56px; font-size: 15px; }
+  .helper { overflow-wrap: anywhere; }
+  .shot-tracker { gap: 5px; margin-top: 16px; }
+  .shot-tracker span { padding: 10px 2px; font-size: 8px; letter-spacing: .3px; }
+  .viewfinder { width: 100%; }
+  .preview-stage { min-width: 0; }
+}
+@media (max-width: 360px) {
+  .workspace { padding: 0 9px; }
+  .camera-panel, .result-panel { padding: 12px; }
+  .camera-actions { gap: 7px; }
+  .camera-actions .button { font-size: 12px; }
+}

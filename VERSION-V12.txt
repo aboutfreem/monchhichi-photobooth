@@ -1,0 +1,1 @@
+V12: Mobile camera action buttons responsive grid; printing and capture logic unchanged.
